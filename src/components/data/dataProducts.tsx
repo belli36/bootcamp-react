@@ -19,6 +19,21 @@ export const dataProductList=[
         name:'bread',
         price:6,
         category:category.bakery,
-        descruption:'tari'
-    }
+        description:'tari'
+    },
+    {
+        id:count++,
+        name:'mifxgf',
+        price:6,
+        category:category.bakery,
+        description:'tari'
+    },
+    {
+        id:count++,
+        name:'brkjkll',
+        price:6,
+        category:category.bakery,
+        description:'tari'
+    },
+    
 ]
