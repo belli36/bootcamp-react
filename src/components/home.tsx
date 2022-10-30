@@ -1,48 +1,35 @@
-import React from "react";
+import React, { Component } from "react";
 import { Button } from "react-bootstrap";
+import { Link, Outlet } from "react-router-dom";
 import { text } from "stream/consumers";
-import { About} from './about';
+import { About } from './about';
+import WithRouter, { IWithRouter } from "./withRouter";
 
 
 
-export class Home extends React.Component {
+class Home extends Component<IWithRouter>{
+
     render(): React.ReactNode {
+        const try3=()=>{
+            const setcart=this.props.setCart("belli");
+             alert(setcart)
+        }
+        const try4=()=>{
+            const getcart=this.props.getCart();
+            // const getcart=this.props.getCart;
+             alert(getcart)
+            // this.props.setCart.key='jjjj'
+            // this.props.cart4('belli');
+           // alert("try "+this.props.cart4)
+        }
+
         return <div>
-            {/* <ul>
-                <li>about</li>
-                <li>dresses</li>
-                <li>shoes</li>
-            </ul> */}
-            <nav className="navbar navbar-default">
-            
-                <div className="container-fluid">
-                    <div className="navbar-header">
-                        <a className="navbar-brand" href="#">Store</a>
-                    </div>
-                    <ul className="nav navbar-nav">
-                        <li className="active"><a href="#">home</a></li>
-                        
-                        <li><a href="#">about</a></li>
-                        <li ><a href="#">products</a></li>
-                        {/* onClick={DressesOnClick} */}
-                       
-                        {/* <li><a href="#">shoes</a></li> */}
-                    </ul>
-                </div>
-            </nav>
-            <p>search</p><input ></input>
-            {/* type={text} */}
-            <Button>belli</Button>
+            <h1>hello home!</h1>
+            <button onClick={try3}>add</button>
+            <button onClick={try4}>get</button>
+
         </div>
 
     }
 }
-// export const Home=()=>{
-//     return(
-//         <ul>
-//             <li>about</li>
-//             <li>dresses</li>
-//             <li>shoes</li>
-//         </ul>
-//     );
-// };
+export default WithRouter(Home);
