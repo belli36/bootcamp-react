@@ -28,9 +28,16 @@ class Products extends Component<IWithRouter>{
     state = {
         arrProducts: this.arr,
         arrP: this.arr,
+        filter:false
         // sumOfCart:0
     }
     render(): React.ReactNode {
+        const getPP=()=>{
+            if(this.state.filter!=true)
+           { getProduct().then(data => this.setState({ arrProducts: data }));}
+
+        }
+        {getPP()}
         // setAllTasks
         // const FuncDel = (_id: string) => {
         //     deleteProduct(_id).then(data => console.log( 'data', data ));
@@ -40,7 +47,7 @@ class Products extends Component<IWithRouter>{
             deleteProduct(_id).then(data => console.log("data" + data));
             getProduct().then(data => { this.setState({ arrProducts: data }); });
         }
-        console.log('PRO', this.state.arrProducts);
+        // console.log('PRO', this.state.arrProducts);
         // const Push = () => {
         //     this.setState({ arrProducts: [...this.state.arrProducts, { id: 'a', name: 'olives', price: 8, category: category.cannedFood }] });
         // }
@@ -52,11 +59,13 @@ class Products extends Component<IWithRouter>{
             const getcart = this.props.getCart();
         }
         const FilterCategory = (a: any) => {
+            this.setState({filter:true});
             getProduct().then(data => this.setState({ arrP: data }));
             this.setState({ arrProducts: this.state.arrP.filter(p => p.category === a) });
         }
 
         const All = () => {
+            this.setState({filter:false})
             getProduct().then(data => this.setState({ arrP: data }));
             this.setState({ arrProducts: this.state.arrP });
         }

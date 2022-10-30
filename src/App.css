@@ -115,6 +115,7 @@ th, td {
 }
 /* #appNav{
   position:fixed;
+  width: 100%;
 } */
 /* #table{
   background-color: white;

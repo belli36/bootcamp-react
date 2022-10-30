@@ -20,8 +20,10 @@ function App() {
   return (
     <RecoilRoot>
       <div id='app' className="App">
+
         <Router>
           <div id="appNav">
+
             <nav id='navApp' className="navbar navbar-expand-lg bg-light container-fluid">
               <menu id='mainMenu'>
                 <ul id='ulApp' className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -30,7 +32,9 @@ function App() {
               </menu>
             </nav>
           </div>
+
           <Routes>
+
             <Route path="/Home" element={<Home />} />
             <Route path="LogIn" element={<LogIn />} />
             <Route path="Cart" element={<Cart />} />
@@ -47,6 +51,8 @@ function App() {
           </Routes>
         </Router>
       </div>
+
+
     </RecoilRoot>
   );
 }

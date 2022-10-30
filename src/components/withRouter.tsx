@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NavigateOptions, Params, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Context } from 'vm';
 import { useRecoilState } from 'recoil';
@@ -16,6 +16,16 @@ function WithRouter(Component: React.ComponentType<IWithRouter & Object>) {
     const getCart = () => {
       return allTasks;
     }
+
+
+    const [openDialog, setDialog] = useState<boolean>(false);
+    const setDialogOpen = (open:boolean) => {
+      console.log("dialog open? "+open);
+      setDialog(open);
+    }
+    const getDialog = () => {
+      return openDialog;
+    } 
     const deleteCart = (id: any) => {
       // let products:CartClass[]=[];
       let productsAfterDelete: CartClass[] = [];
@@ -54,6 +64,7 @@ function WithRouter(Component: React.ComponentType<IWithRouter & Object>) {
     const location = useLocation();
     const navigate = useNavigate();
     const params = useParams();
+    const formEL=useRef<any>(null)
     // const context= useContext(arrProductsContext);
     const myprops = {
       location,
@@ -61,7 +72,10 @@ function WithRouter(Component: React.ComponentType<IWithRouter & Object>) {
       params,
       setCart,
       getCart,
-      deleteCart
+      deleteCart,
+      formEL,
+      setDialogOpen,
+      getDialog
       // context
     }
     return <Component {...propsUse} {...myprops} />;
@@ -71,10 +85,13 @@ function WithRouter(Component: React.ComponentType<IWithRouter & Object>) {
 export default WithRouter;
 export interface IWithRouter {
   location: Location,
-  navigate: NavigateOptions,
+  navigate: any,
   params: Params,
   context: Context,
   setCart: any,
   getCart: any,
-  deleteCart: any
+  deleteCart: any,
+  formEL:any,
+  setDialogOpen:any,
+  getDialog:any
 }

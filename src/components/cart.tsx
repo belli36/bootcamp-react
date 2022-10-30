@@ -8,7 +8,8 @@ import { category } from "../data/dataProducts";
 import WithRouter, { IWithRouter } from "./withRouter";
 class Cart extends Component<IWithRouter>{
     state = {
-        name: 'belli'
+        name: 'belli',
+        address:'shaaget arye 21'
     };
     //משתנה הסכימה
     public render(): React.ReactNode {
@@ -34,10 +35,7 @@ class Cart extends Component<IWithRouter>{
             //     if(p._id!=id)
             //         return p;   
             // })
-            
-            // this.props.setCart(products);
-
-          
+            // this.props.setCart(products);  
         }
         //הצגת מוצרי הסל
         const rows = this.props.getCart().map((current: any) => {
@@ -57,7 +55,7 @@ class Cart extends Component<IWithRouter>{
         //תשלום והנפקת קבלה
         const Pay = () => {
             // console.log(p );
-            kabala(this.state.name, p );
+            kabala(this.state.name ,p ,this.state.address);
             console.log(this.state.name)
         };
         return <div id="cart">
@@ -73,22 +71,22 @@ class Cart extends Component<IWithRouter>{
                             {rows}
                         </table>
                     </tbody>
-                    {/* onClick={Push} */}
                     {/* <Button onClick={Push}>delete</Button> */}
                     {/* <div id='btnAdd'>{<Link to={`ProductFormAdd/add`}><Button > add product</Button></Link>}</div> */}
                 </div>
                 <div id="cartFlex2">
                     <div id="outletCart"><Outlet /></div>
                 </div>
-                {/* <Button onClick={PayNow}>pay now</Button> */}
             </div>
             <form>
                 <div>
-                    <input aria-label="Username" aria-describedby="basic-addon1" className="form-control" type="text" placeholder="enter your name" onChange={r => this.setState({ name: String(r.currentTarget.value) })} />
+                    <input aria-label="Name" aria-describedby="basic-addon1" className="form-control" type="text" placeholder="enter your name" onChange={r => this.setState({ name: String(r.currentTarget.value) })} />
+                </div>
+                <div>
+                    <input aria-label="Address" aria-describedby="basic-addon1" className="form-control" type="text" placeholder="enter your address" onChange={r => this.setState({ address: String(r.currentTarget.value) })} />
                 </div>
                 <p>{p}</p>
                 <Button onClick={Pay}>pay now</Button>
-
             </form >
         </div >
     }

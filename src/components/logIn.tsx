@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { User } from "../classes/user.class";
-// import '../css/login.css'
 import { getAllUser, signIn, signUp } from "../services/login.service";
 class Login extends  React.Component  {
     state = {
@@ -13,8 +12,8 @@ class Login extends  React.Component  {
     }
     render(): React.ReactNode {
        
-        const csignIn = () => {            
-            signIn(new User(this.state.name, this.state.email, this.state.password));
+        const csignIn = async() => {            
+           await signIn(new User(this.state.name, this.state.email, this.state.password));
             console.log("csignIn");
             console.log(new User(this.state.name, this.state.email, this.state.password))
         }
