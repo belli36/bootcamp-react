@@ -28,7 +28,7 @@ class Home extends Component<IWithRouter>{
             {/* <button onClick={try3}>add</button>
             <button onClick={try4}>get</button> */}
             {/* <img id="bigImgHome" src="https://img.ltwebstatic.com/images3_pi/2022/07/04/1656938455f311a413671567470b3a74cb2806fec0_thumbnail_900x.webp"></img> */}
-           <div id="bigImgHome"></div>
+           <div id="bigImgHome"><p id="titleHome">Event Click<br></br>כל ארוע בקליק!</p></div>
             <div id="homeFlex">
                 <div className="categoryHome" id="categoryHome1">
                 {/*<Link to={`/Products`}>*/}<h2 className="h2Home">פטריות חימום</h2>{/*</Link>*/}

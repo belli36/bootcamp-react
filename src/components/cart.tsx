@@ -3,13 +3,14 @@ import { Button } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 import { text } from "stream/consumers";
 import { MDBInput } from "mdbreact";
-import { recept } from "../services/dataProducts.service";
+import { recept ,sendEmail} from "../services/dataProducts.service";
 import { category } from "../data/dataProducts";
 import WithRouter, { IWithRouter } from "./withRouter";
 class Cart extends Component<IWithRouter>{
     state = {
         name: 'belli',
-        address: 'shaaget arye 21'
+        address: 'shaaget arye 21',
+        email:'b7101136@gmail.com'
     };
     //משתנה הסכימה
     public render(): React.ReactNode {
@@ -55,12 +56,15 @@ class Cart extends Component<IWithRouter>{
         //תשלום והנפקת קבלה
         const Pay = () => {
             // console.log(p );
-            recept(this.state.name, p, this.state.address);
+            recept(this.state.name, p, this.state.address,this.state.email);
             console.log(this.state.name)
             return (
                 < div className="alert alert-success" >
                     <strong>Success!</strong> Indicates a successful or positive action.
                 </div >)
+        };
+        const email=()=>{
+            sendEmail(this.state.name, p, this.state.address,this.state.email)
         };
         return <div id="cart">
             <h1>cart</h1>
@@ -89,8 +93,12 @@ class Cart extends Component<IWithRouter>{
                 <div>
                     <input aria-label="Address" aria-describedby="basic-addon1" className="form-control" type="text" placeholder="enter your address" onChange={r => this.setState({ address: String(r.currentTarget.value) })} />
                 </div>
+                <div>
+                    <input aria-label="Email" aria-describedby="basic-addon1" className="form-control" type="text" placeholder="enter your email" onChange={r => this.setState({ email: String(r.currentTarget.value) })} />
+                </div>
                 <p>Total is: {p}</p>
                 <Button onClick={Pay}>pay now</Button>
+                <Button onClick={email}>email</Button>
             </form >
         </div >
     }

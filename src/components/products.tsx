@@ -82,8 +82,8 @@ class Products extends Component<IWithRouter>{
                         {/* {<Link to={`ShowProduct/${a._id}`}><Button>View</Button></Link>} */}
                         <Button className="btn btn-primary" id="btnCart" onClick={() => { FuncCart(a._id); }}>הוספה לסל</Button>
                     </div>
-                    {/* <Button id="btnDelProduct" onClick={() => { FuncDel(a._id); }}>מחיקה</Button> */}
-                    {/* {<Link id="btnEditProduct" to={`/ProductFormEdit/${a._id}/edit/${a.name}/${a.price}/${a.category}`}><Button>עריכה</Button></Link>} */}
+                    <Button id="btnDelProduct" onClick={() => { FuncDel(a._id); }}>מחיקה</Button>
+                    {<Link id="btnEditProduct" to={`/ProductFormEdit/${a._id}/edit/${a.name}/${a.price}/${a.category}`}><Button>עריכה</Button></Link>}
                     {/* </tr>  */}
                 </div></Link>
             );

@@ -30,7 +30,8 @@ export async function deleteProduct(_id: any) {
             method: "DELETE",
             headers: {
                 'Accept': 'application/json',
-                "content-type": "app/json"
+                "content-type": "app/json",
+                'Authorization': 'Bearer ' + token
             },
 
 
@@ -101,9 +102,9 @@ export const add = (a: number, b: number) => {
     return a + b;
 }
 //הנפקת קבלה
-export async function recept(x: any, y: Number, z: any) {
+export async function recept(x: any, y: Number, z: any,a:any) {
     console.log(x, y);
-    const response = await fetch(`http://localhost:3000/api/products/recept/${x}/${y}/${z}`,
+    const response = await fetch(`http://localhost:3000/api/products/recept/${x}/${y}/${z}/${a}`,
         {
             method: "POST",
             headers: {
@@ -134,4 +135,23 @@ export async function getProductById(id: string | undefined) {
         throw Error("err not status 200")
     }
     return body;
+}
+
+export async function sendEmail(x: any, y: Number, z: any,a:any) {
+    console.log(x, y);
+    const response = await fetch(`http://localhost:3000/api/products/sendEmail/${x}/${y}/${z}/${a}`,
+        {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                "content-type": "app/json",
+                // 'Authorization':'Bearer ' + token
+            },
+        });
+    const body = await response.json();
+    if (response.status !== 200) {
+        throw Error("err not status 200")
+    }
+
+    console.log("recept" + x);
 }
