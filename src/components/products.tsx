@@ -2,7 +2,7 @@ import { count } from "console";
 import React, { Component, useState } from "react";
 import { Button } from "react-bootstrap";
 import { text } from "stream/consumers";
-import { category} from "../data/dataProducts";
+import { category } from "../data/dataProducts";
 import { MDBInput } from "mdbreact";
 import { Outlet, Link } from "react-router-dom";
 import WithRouter, { IWithRouter } from "./withRouter";
@@ -24,20 +24,20 @@ class Products extends Component<IWithRouter>{
         // console.log('PRO',this.state.arrProducts) ;       
     }
     arr: Product[] = [];
-    arrButtons = ['shoes', 'yard', 'baloons'];
+    arrButtons = [ 'חימום', 'בלונים','קונפיטי','זרי כלה','דוכני מזון'];
     state = {
         arrProducts: this.arr,
         arrP: this.arr,
-        filter:false
+        filter: false
         // sumOfCart:0
     }
     render(): React.ReactNode {
-        const getPP=()=>{
-            if(this.state.filter!=true)
-           { getProduct().then(data => this.setState({ arrProducts: data }));}
+        const getPP = () => {
+            if (this.state.filter != true) { getProduct().then(data => this.setState({ arrProducts: data })); }
 
         }
-        {getPP()}
+        // if()
+        // { getPP() }
         // setAllTasks
         // const FuncDel = (_id: string) => {
         //     deleteProduct(_id).then(data => console.log( 'data', data ));
@@ -59,13 +59,13 @@ class Products extends Component<IWithRouter>{
             const getcart = this.props.getCart();
         }
         const FilterCategory = (a: any) => {
-            this.setState({filter:true});
+            this.setState({ filter: true });
             getProduct().then(data => this.setState({ arrP: data }));
             this.setState({ arrProducts: this.state.arrP.filter(p => p.category === a) });
         }
 
         const All = () => {
-            this.setState({filter:false})
+            this.setState({ filter: false })
             getProduct().then(data => this.setState({ arrP: data }));
             this.setState({ arrProducts: this.state.arrP });
         }
@@ -73,15 +73,17 @@ class Products extends Component<IWithRouter>{
         const rows = this.state.arrProducts.map((a) => {
             return (
                 // <tr>
-                <Link to={`ShowProduct/${a._id}`} id="product"><div >
-                    <img src={a.image} id="productImage"></img><br />
-                    <h2 id="productName">{a.name}</h2>
-                    <h1 id="productPrice">{a.price}</h1>
-                    <h3 id="productCategory">{a.category}</h3>
-                    {/* {<Link to={`ShowProduct/${a._id}`}><Button>View</Button></Link>} */}
-                    <Button id="btnCart" onClick={() => { FuncCart(a._id); }}>cart</Button>
-                    <Button id="btnDelProduct" onClick={() => { FuncDel(a._id); }}>Delete</Button>
-                    {<Link id="btnEditProduct" to={`ProductFormEdit/${a._id}/edit/${a.name}/${a.price}/${a.category}`}><Button>Edit</Button></Link>}
+                <Link to={`/ShowProduct/${a._id}`} className="card" style={{ width: "400px" }} id="product"><div >
+                    <img src={a.image} className="card-img-top" id="productImage"></img><br />
+                    <div className="card-body">
+                        <h2 className="card-title" id="productName">{a.name}</h2>
+                        <h1 className="card-text" id="productPrice">{a.price} ש"ח</h1>
+                        {/* <h3 id="productCategory">{a.category}</h3> */}
+                        {/* {<Link to={`ShowProduct/${a._id}`}><Button>View</Button></Link>} */}
+                        <Button className="btn btn-primary" id="btnCart" onClick={() => { FuncCart(a._id); }}>הוספה לסל</Button>
+                    </div>
+                    <Button id="btnDelProduct" onClick={() => { FuncDel(a._id); }}>מחיקה</Button>
+                    {<Link id="btnEditProduct" to={`/ProductFormEdit/${a._id}/edit/${a.name}/${a.price}/${a.category}`}><Button>עריכה</Button></Link>}
                     {/* </tr>  */}
                 </div></Link>
             );
@@ -108,29 +110,51 @@ class Products extends Component<IWithRouter>{
             this.setState({ arrProducts: this.state.arrP.filter(p => p.name.indexOf(event) != -1) });
         }
         return <div id="products">
-            <h3 id="CountCart">cart {this.props.getCart().length}</h3>
-            <div id="productsFlex">
-                <div id="productsFlex1">
-                    <MDBInput id='search' background size="lg" placeholder="enter descraption" onChange={(event) => Search(event.currentTarget.value)} />
-                    <div id="btnsCategory"><Button id="btnAll" onClick={All}>all</Button>
-                    {buttons}</div>
-                    {/* <tbody>
-                        <table id="table">
-                            <th> name</th>
-                            <th> price</th>
-                            <th> category</th> */}
+            <div className="grid-container">
+                {/*   
+  
+  <div class="item3">Main</div>  
+  <div class="item4">Right</div> */}
+
+                <div className="item1">
+                    <h3 id="CountCart">סל: {this.props.getCart().length}</h3>
+                    {/* <div id="productsFlex"> */}
+                    {/* <div id="productsFlex1"> */}
+                    <div id="searchAndButtons">
+                        <MDBInput id='search' background size="lg" placeholder="enter descraption" onChange={(event) => Search(event.currentTarget.value)} />
+                        <div id="btnsCategory"><Button id="btnAll" onClick={All}>הכל</Button>
+                            {buttons}
+                        </div>
+                    </div>
+                </div>
+                {/* <div className="item2">
+                    <p>jhgfdfghjkljhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p><br></br>
+                    <p>jhgfdfghjkljhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p><br></br>
+                </div> */}
+                {/* </div> */}
+                {/* </div> */}
+                <div className="item3">
                     <div id="rowsFlex">{rows}</div>
-                    {/* </table> */}
-                    {/* </tbody> */}
-                    {/* onClick={Push} */}
-                    {/* <Button onClick={Push}>delete</Button> */}
-                    <div id='btnAdd'>{<Link to={`ProductFormAdd/add`}><Button > add product</Button></Link>}</div>
                 </div>
-                <div id="productsFlex2">
-                    <div id="outletProducts"><Outlet /></div>
-                </div>
+
+                <div id='btnAdd'>{<Link to={`/ProductFormAdd/add`}><Button > הוספת מוצר</Button></Link>}</div>
+                {/* <div id="productsFlex2">
+                        <div id="outletProducts"><Outlet /></div>
+                    </div> */}
+
+                {/* <div className="item5"> */}
+
+                <ul className="pagination">
+                    <li className="page-item disabled"><a className="page-link" href="#">Previous</a></li>
+                    <li className="page-item"><a className="page-link" href="#">1</a></li>
+                    <li className="page-item"><a className="page-link" href="#">2</a></li>
+                    <li className="page-item"><a className="page-link" href="#">3</a></li>
+                    <li className="page-item"><a className="page-link" href="#">Next</a></li>
+                </ul>
+                {/* </div> */}
+
             </div>
-        </div>;
+        </div >
     }
 }
 export default WithRouter(Products);

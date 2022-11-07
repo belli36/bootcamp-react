@@ -12,6 +12,7 @@ function WithRouter(Component: React.ComponentType<IWithRouter & Object>) {
     const [allTasks, setAllTasks] = useRecoilState(cartState);
     const setCart = (product: CartClass) => {
       setAllTasks([...allTasks, product]);
+
     }
     const getCart = () => {
       return allTasks;

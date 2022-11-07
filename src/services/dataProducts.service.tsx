@@ -1,5 +1,6 @@
 import { Product } from "../classes/product.class";
 import axios from "axios";
+import { Alert } from "@mui/material";
 let token = sessionStorage.getItem('token');
 
 //הצגת כל המוצרים
@@ -15,6 +16,8 @@ export async function getProduct() {
         });
     const body = await response.json();
     if (response.status !== 200) {
+        alert("please signin")
+
         throw Error("err not status 200")
     }
     return body;
@@ -27,7 +30,8 @@ export async function deleteProduct(_id: any) {
             method: "DELETE",
             headers: {
                 'Accept': 'application/json',
-                "content-type": "app/json"
+                "content-type": "app/json",
+                'Authorization': 'Bearer ' + token
             },
 
 
@@ -39,7 +43,7 @@ export async function deleteProduct(_id: any) {
     console.log('success')
     return body;
 }
-//יצירת מוצר-לא עובד-למנהל
+//יצירת מוצר-למנהל
 export async function creatProduct(obj: Product) {
     let item = {
         name: obj.name,
@@ -48,6 +52,7 @@ export async function creatProduct(obj: Product) {
         description: obj.description,
         image: obj.image
     }
+    console.log(item.image);
     const response = await fetch('http://localhost:3000/api/products',
         {
             method: 'POST',
@@ -60,7 +65,7 @@ export async function creatProduct(obj: Product) {
         .then(data => console.log(data))
         .catch(error => console.log('Unable to get items.', error));
 }
-//עדכון מוצר-לא עובד-למנהל
+//עדכון מוצר-למנהל
 
 
 
@@ -97,9 +102,9 @@ export const add = (a: number, b: number) => {
     return a + b;
 }
 //הנפקת קבלה
-export async function kabala(x: any, y: Number, z: any) {
+export async function recept(x: any, y: Number, z: any,a:any) {
     console.log(x, y);
-    const response = await fetch(`http://localhost:3000/api/products/kabala/${x}/${y}/${z}`,
+    const response = await fetch(`http://localhost:3000/api/products/recept/${x}/${y}/${z}/${a}`,
         {
             method: "POST",
             headers: {
@@ -113,7 +118,7 @@ export async function kabala(x: any, y: Number, z: any) {
         throw Error("err not status 200")
     }
 
-    console.log("kabala" + x);
+    console.log("recept" + x);
 }
 export async function getProductById(id: string | undefined) {
     const response = await fetch(`http://localhost:3000/api/products/${id}`,
@@ -130,4 +135,23 @@ export async function getProductById(id: string | undefined) {
         throw Error("err not status 200")
     }
     return body;
+}
+
+export async function sendEmail(x: any, y: Number, z: any,a:any) {
+    console.log(x, y);
+    const response = await fetch(`http://localhost:3000/api/products/sendEmail/${x}/${y}/${z}/${a}`,
+        {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                "content-type": "app/json",
+                // 'Authorization':'Bearer ' + token
+            },
+        });
+    const body = await response.json();
+    if (response.status !== 200) {
+        throw Error("err not status 200")
+    }
+
+    console.log("recept" + x);
 }

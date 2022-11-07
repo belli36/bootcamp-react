@@ -3,9 +3,7 @@ export class CartClass{
     name: string | undefined
     price: number | undefined
     category: string | undefined
-    image: string | undefined 
-
-    
+    image: string | undefined   
     constructor(){
         
     }

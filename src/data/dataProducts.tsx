@@ -1,8 +1,10 @@
 let count=0;
 export enum category{
-    shoes="shoes",
-   yard="yard",
-   baloons="baloons"
+   mashroomsHeating="חימום",
+   baloons="בלונים",
+   confity="קונפיטי",
+   bridalBouquet="זרי כלה",
+   foodStands="דוכני מזון"
    
 } 
 // export const dataProductList=[

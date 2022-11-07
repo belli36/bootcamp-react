@@ -3,17 +3,18 @@ import { Button } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 import { text } from "stream/consumers";
 import { MDBInput } from "mdbreact";
-import { kabala } from "../services/dataProducts.service";
+import { recept ,sendEmail} from "../services/dataProducts.service";
 import { category } from "../data/dataProducts";
 import WithRouter, { IWithRouter } from "./withRouter";
 class Cart extends Component<IWithRouter>{
     state = {
         name: 'belli',
-        address:'shaaget arye 21'
+        address: 'shaaget arye 21',
+        email:'b7101136@gmail.com'
     };
     //משתנה הסכימה
     public render(): React.ReactNode {
-        let p=0;
+        let p = 0;
         // const AddCart = () => {
         //     console.log("i in cart");
         // }
@@ -28,7 +29,7 @@ class Cart extends Component<IWithRouter>{
         //פונקציית מחיקה
         // const delete=(id:any)=>{
         // }
-        const DeleteCart=(id:any)=>{
+        const DeleteCart = (id: any) => {
             this.props.deleteCart(id);
             // this.props.getCart();
             // const products=this.props.getCart().map((p:any)=>{
@@ -40,14 +41,14 @@ class Cart extends Component<IWithRouter>{
         //הצגת מוצרי הסל
         const rows = this.props.getCart().map((current: any) => {
             p += current[0].price;
-            console.log("id meazben"+current[0]._id);
+            console.log("id meazben" + current[0]._id);
             return (
                 <tr>
                     <td>{current[0]._id}</td>
                     <td>{current[0].name}</td>
                     <td>{current[0].price}</td>
                     <img src={current[0].image} id="tableCartImage"></img>
-                    <Button onClick={() => { DeleteCart(current[0]._id);}}>delete</Button>
+                    <Button onClick={() => { DeleteCart(current[0]._id); }}>delete</Button>
                     {/* <td><Button onClick={() => { delete(current[0]._id); }}>Delete</Button></td> */}
                 </tr>
             );
@@ -55,8 +56,15 @@ class Cart extends Component<IWithRouter>{
         //תשלום והנפקת קבלה
         const Pay = () => {
             // console.log(p );
-            kabala(this.state.name ,p ,this.state.address);
+            recept(this.state.name, p, this.state.address,this.state.email);
             console.log(this.state.name)
+            return (
+                < div className="alert alert-success" >
+                    <strong>Success!</strong> Indicates a successful or positive action.
+                </div >)
+        };
+        const email=()=>{
+            sendEmail(this.state.name, p, this.state.address,this.state.email)
         };
         return <div id="cart">
             <h1>cart</h1>
@@ -85,8 +93,12 @@ class Cart extends Component<IWithRouter>{
                 <div>
                     <input aria-label="Address" aria-describedby="basic-addon1" className="form-control" type="text" placeholder="enter your address" onChange={r => this.setState({ address: String(r.currentTarget.value) })} />
                 </div>
-                <p>{p}</p>
+                <div>
+                    <input aria-label="Email" aria-describedby="basic-addon1" className="form-control" type="text" placeholder="enter your email" onChange={r => this.setState({ email: String(r.currentTarget.value) })} />
+                </div>
+                <p>Total is: {p}</p>
                 <Button onClick={Pay}>pay now</Button>
+                <Button onClick={email}>email</Button>
             </form >
         </div >
     }
